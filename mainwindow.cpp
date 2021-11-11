@@ -7,7 +7,7 @@
 #include <QSqlQuery>
 #include <QDate>
 #include <QDebug>
-///syrine 1
+///syrine
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
