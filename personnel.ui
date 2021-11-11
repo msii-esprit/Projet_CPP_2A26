@@ -17,10 +17,13 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>0</y>
+     <y>10</y>
      <width>701</width>
      <height>461</height>
     </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -36,17 +39,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Nom</string>
-     </property>
-    </widget>
-    <widget class="QTextBrowser" name="textBrowser">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>70</y>
-       <width>111</width>
-       <height>21</height>
-      </rect>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Nom&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_2">
@@ -58,21 +51,24 @@
        <height>14</height>
       </rect>
      </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
      <property name="text">
-      <string>Adress</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Adress&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>110</y>
-       <width>47</width>
-       <height>14</height>
+       <x>36</x>
+       <y>104</y>
+       <width>41</width>
+       <height>20</height>
       </rect>
      </property>
      <property name="text">
-      <string>CIN</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;CIN&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_4">
@@ -84,8 +80,11 @@
        <height>16</height>
       </rect>
      </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
      <property name="text">
-      <string>Date de Naissance</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Date de Naissance&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_5">
@@ -98,7 +97,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Sexe</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Grade&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_6">
@@ -111,7 +110,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Email</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Email&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_7">
@@ -124,7 +123,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Prénom</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Prénom&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_8">
@@ -137,60 +136,10 @@
       </rect>
      </property>
      <property name="text">
-      <string>Numero de tel</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Numero de tel&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
-    <widget class="QTextBrowser" name="textBrowser_4">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>110</y>
-       <width>111</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QTextBrowser" name="textBrowser_5">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>30</y>
-       <width>111</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QTextBrowser" name="textBrowser_6">
-     <property name="geometry">
-      <rect>
-       <x>540</x>
-       <y>70</y>
-       <width>111</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QTextBrowser" name="textBrowser_7">
-     <property name="geometry">
-      <rect>
-       <x>540</x>
-       <y>30</y>
-       <width>111</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QTextBrowser" name="textBrowser_8">
-     <property name="geometry">
-      <rect>
-       <x>320</x>
-       <y>110</y>
-       <width>111</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="pb_ajouter">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -200,7 +149,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Ajouter</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_3">
@@ -213,7 +162,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>QR Code</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_4">
@@ -226,7 +175,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Chat</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_5">
@@ -239,7 +188,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Imprimer PDF</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_6">
@@ -252,7 +201,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Tri</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_7">
@@ -265,7 +214,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Recherche</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_8">
@@ -278,7 +227,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Afficher</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_9">
@@ -291,7 +240,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Supprimer</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_10">
@@ -304,7 +253,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>PushButton</string>
+      <string>Mise à Jour</string>
      </property>
     </widget>
     <widget class="QTextEdit" name="textEdit">
@@ -317,7 +266,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox">
+    <widget class="QComboBox" name="le_Grade">
      <property name="geometry">
       <rect>
        <x>320</x>
@@ -342,7 +291,7 @@
       </property>
      </item>
     </widget>
-    <widget class="QDateEdit" name="dateEdit">
+    <widget class="QDateEdit" name="la_Datedenaissance">
      <property name="geometry">
       <rect>
        <x>320</x>
@@ -352,23 +301,80 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLabel" name="label_9">
+    <widget class="QLineEdit" name="le_Nom">
      <property name="geometry">
       <rect>
-       <x>-4</x>
-       <y>3</y>
-       <width>701</width>
-       <height>431</height>
+       <x>80</x>
+       <y>30</y>
+       <width>113</width>
+       <height>20</height>
       </rect>
      </property>
-     <property name="text">
-      <string/>
+    </widget>
+    <widget class="QLineEdit" name="le_Email">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>110</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="Le_CIN">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>110</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="le_Prenom">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>70</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="la_Adress">
+     <property name="geometry">
+      <rect>
+       <x>530</x>
+       <y>30</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="le_Ntel">
+     <property name="geometry">
+      <rect>
+       <x>530</x>
+       <y>70</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
      </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
      <string>Tab 2</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="tab_3">
+    <attribute name="title">
+     <string>Page</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="tab_4">
+    <attribute name="title">
+     <string>Page</string>
     </attribute>
    </widget>
   </widget>
