@@ -143,7 +143,7 @@
      <widget class="QPushButton" name="pb_ajouter">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>150</x>
         <y>170</y>
         <width>121</width>
         <height>31</height>
@@ -156,7 +156,7 @@
      <widget class="QPushButton" name="pushButton_afficher">
       <property name="geometry">
        <rect>
-        <x>490</x>
+        <x>510</x>
         <y>170</y>
         <width>121</width>
         <height>31</height>
@@ -169,7 +169,7 @@
      <widget class="QPushButton" name="pushButtonSupprimer">
       <property name="geometry">
        <rect>
-        <x>340</x>
+        <x>390</x>
         <y>170</y>
         <width>121</width>
         <height>31</height>
@@ -182,7 +182,7 @@
      <widget class="QPushButton" name="pushButton_mise_a_jour">
       <property name="geometry">
        <rect>
-        <x>190</x>
+        <x>270</x>
         <y>170</y>
         <width>121</width>
         <height>31</height>
@@ -263,7 +263,7 @@
        <rect>
         <x>40</x>
         <y>220</y>
-        <width>741</width>
+        <width>571</width>
         <height>311</height>
        </rect>
       </property>
@@ -315,54 +315,94 @@
        <bool>true</bool>
       </property>
      </widget>
-    </widget>
-    <widget class="QWidget" name="widget">
-     <attribute name="title">
-      <string>afficher</string>
-     </attribute>
-     <widget class="QTableView" name="tableView_personnel_2">
+     <widget class="QPushButton" name="pushButton_recherche">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>501</width>
-        <height>251</height>
+        <x>640</x>
+        <y>220</y>
+        <width>111</width>
+        <height>31</height>
        </rect>
       </property>
+      <property name="text">
+       <string>Rechercher</string>
+      </property>
      </widget>
-    </widget>
-    <widget class="QWidget" name="tab_3">
-     <attribute name="title">
-      <string>supprimer</string>
-     </attribute>
-     <widget class="QLineEdit" name="lineEdit_id_sup">
+     <widget class="QPushButton" name="pushButton_Trier">
       <property name="geometry">
        <rect>
-        <x>270</x>
-        <y>130</y>
+        <x>640</x>
+        <y>280</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Trier</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_PDF">
+      <property name="geometry">
+       <rect>
+        <x>640</x>
+        <y>340</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Imprimer PDF</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_chat">
+      <property name="geometry">
+       <rect>
+        <x>640</x>
+        <y>400</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Chat</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_QR">
+      <property name="geometry">
+       <rect>
+        <x>640</x>
+        <y>460</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Code QR</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_Reset">
+      <property name="geometry">
+       <rect>
+        <x>640</x>
+        <y>170</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Reset</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_rechercher">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>170</y>
         <width>113</width>
         <height>20</height>
        </rect>
       </property>
      </widget>
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>210</x>
-        <y>130</y>
-        <width>47</width>
-        <height>14</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>id</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_4">
-     <attribute name="title">
-      <string>Page</string>
-     </attribute>
     </widget>
    </widget>
   </widget>

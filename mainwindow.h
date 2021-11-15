@@ -23,7 +23,7 @@ public:
 
 private slots:
     void on_pb_ajouter_clicked();
-    //void on_pushButtonSupprimer_clicked();
+
 
     void on_pushButton_afficher_clicked();
 
@@ -31,6 +31,12 @@ private slots:
 
     void on_pushButton_mise_a_jour_clicked();
 bool search(int);
+    //void on_pushButton_Trier_clicked();
+
+    void on_lineEdit_rechercher_textChanged();
+
+    void on_pushButton_PDF_clicked();
+
 private:
     Ui::MainWindow *ui;
     PERSONNEL P;

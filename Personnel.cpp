@@ -34,7 +34,10 @@
 
  void PERSONNEL::setCIN(int CIN)
  {this->CIN=CIN;}
-
+ void PERSONNEL::setnom(QString nom)
+ {this->nom=nom;}
+ void PERSONNEL::setprenom(QString prenom)
+ {this->prenom=prenom;}
  int PERSONNEL::getCIN(){return CIN  ;}
  int PERSONNEL::getN_tel(){return N_tel ;}
  QString PERSONNEL::getnom(){return nom  ;}
@@ -44,6 +47,14 @@
  QString PERSONNEL::getadress(){return adress  ;}
  QDate PERSONNEL::getdate_de_naissance(){return date_de_naissance  ;}
 
+ void setCIN(int);
+ void setnom(QString);
+ void setprenom(QString);
+ void setdate_de_naissance(QDate);
+ void setemail(QString);
+ void setgrade(QString);
+ void setadress(QString);
+ void setN_tel(int);
 
 
 
@@ -52,7 +63,7 @@ bool  PERSONNEL :: ajouter()
 {
 
     QSqlQuery query;
-    //QString CIN_string= QString::number(CIN);
+
     query.prepare("INSERT INTO PERSONNEL (NOM_P,PRENOM_P,CIN_P,GRADE_P,DATE_N_P,ADRESS_P,EMAIL_P,NUM_TEL_P) "
                   "VALUES ( :nom, :prenom, :CIN, :grade, :date_de_naissance, :adress , :email, :N_tel)");
 
@@ -67,10 +78,7 @@ bool  PERSONNEL :: ajouter()
 
    return query.exec();
 
-
 }
-
-
 
 
 
@@ -85,17 +93,14 @@ QSqlQueryModel* PERSONNEL ::afficherPersonnel()
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("CIN_P"));
     model->setHeaderData(3, Qt::Horizontal, QObject::tr("GRADE_P"));
     model->setHeaderData(4, Qt::Horizontal, QObject::tr("DATE_DE_NAISSANCE"));
-     model->setHeaderData(5, Qt::Horizontal, QObject::tr("N_tel"));
-     model->setHeaderData(6, Qt::Horizontal, QObject::tr("ADRESS_P"));
-       model->setHeaderData(7, Qt::Horizontal, QObject::tr("EMAIL_P"));
-
-
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("N_tel"));
+    model->setHeaderData(6, Qt::Horizontal, QObject::tr("ADRESS_P"));
+    model->setHeaderData(7, Qt::Horizontal, QObject::tr("EMAIL_P"));
 
 
 return model;
 
 }
-
 
 
 bool PERSONNEL ::supprimerPersonnel(int personnel)
@@ -107,8 +112,6 @@ bool PERSONNEL ::supprimerPersonnel(int personnel)
          query.bindValue(":CIN_P", personnel);
 
               return query.exec();
-
-
 
 }
 
@@ -137,59 +140,37 @@ bool PERSONNEL::modifierPersonnel(QString nom,QString prenom,int CIN,QString gra
 
 
 
+/////////////////////////////// fin dimplementation des crud  /////////////////////////////////
 
 
-
-
-
-
-
-
-
-/*
-
-/////////////////////////////// finnnn dimplementation des crud  /////////////////////////////////
-
-
-QSqlQueryModel * PERSONNEL ::chercherPersonnel(int, QString, QString) CIN_P,QString type,QString regime)
+QSqlQueryModel * PERSONNEL::chercherPersonnel(QString recherche)
 {
     QSqlQueryModel * model=new QSqlQueryModel();
-    QSqlQuery query;
-    query.prepare("SELECT * from ANIMAUX where ID_ANIMAL like :id or TYPE_ANIMAL like :type or REGIME_ALIMENT like :regime ");
-    query.bindValue(":id",id);// ID VARIABLE LOCAL BA3D BCH NA3MALOU APPEL BIL getIDANIM()
-    query.bindValue(":type",type);
-    query.bindValue(":regime",regime);
-    query.exec();
-    model->setQuery(query);
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID  ANIMAL"));
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM ANIMAL"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("TYPE ANIMAL"));
-    model->setHeaderData(3, Qt::Horizontal, QObject::tr("AGE ANIMAL"));
-    model->setHeaderData(4, Qt::Horizontal, QObject::tr("PAYS ANIMAL"));
-    model->setHeaderData(5, Qt::Horizontal, QObject::tr("REGIME ALIMENTAIRE"));
-    model->setHeaderData(6, Qt::Horizontal, QObject::tr("STATUS ANIMAL"));
+    model->setQuery("SELECT * FROM personnel WHERE cin_p LIKE '"+recherche+"%' OR nom_p LIKE '"+recherche+"%' OR prenom_p LIKE '"+recherche+"%'");
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("NOM_P"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("PRENOM_P"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("CIN_P"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("GRADE_P"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("DATE_DE_NAISSANCE"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("N_tel"));
+    model->setHeaderData(6, Qt::Horizontal, QObject::tr("ADRESS_P"));
+    model->setHeaderData(7, Qt::Horizontal, QObject::tr("EMAIL_P"));
 
     return model;
 }
 
 
+/*
 
-
-QSqlQueryModel* PERSONNEL ::trierAnim()
+QSqlQueryModel * PERSONNEL::trierPersonnel()
 {
-    QSqlQueryModel* model = new QSqlQueryModel();
+    QSqlQuery* q = new QSqlQuery();
+    QSqlQueryModel * model= new QSqlQueryModel();
 
-        model->setQuery("select *FROM ANIMAUX ORDER BY ID_ANIMAL ASC");
-
-
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("NOM"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("PRENOM"));
-    model->setHeaderData(3, Qt::Horizontal, QObject::tr("ROLE"));
-    model->setHeaderData(4, Qt::Horizontal, QObject::tr("PASS"));
-    model->setHeaderData(5, Qt::Horizontal, QObject::tr("REPASS"));
-
-    return model;
+        q->prepare("select *FROM PERSONNEL ORDER BY CIN_P ASC");
+        q->exec();
+        model->setQuery(*q);
+        return model;
 }
 
 
@@ -197,49 +178,32 @@ QSqlQueryModel* PERSONNEL ::trierAnim()
 bool PERSONNEL ::supprimerTout()
 { QSqlQuery query;
 
-   query.prepare("delete from animaux ");
+   query.prepare("delete from personnel ");
 
   return query.exec();
 }
 
-
 */
 
 
 
 
 
-/*
-
- QSqlQueryModel* PERSONNEL::afficher()
-{
-    QSqlQueryModel* model=new QSqlQueryModel();
 
 
-   model->setQuery("SELECT* FROM Personnel");
-  model->setHeaderData(0, Qt::Horizontal, QObject:: tr("CIN"));
-   model->setHeaderData(1, Qt::Horizontal, QObject:: tr("nom"));
-   model->setHeaderData(2, Qt::Horizontal, QObject:: tr("prenom"));
-   model->setHeaderData(3, Qt::Horizontal, QObject:: tr("date_de_naissance"));
-   model->setHeaderData(4, Qt::Horizontal, QObject:: tr("grede"));
-   model->setHeaderData(5, Qt::Horizontal, QObject:: tr("email"));
-   model->setHeaderData(6, Qt::Horizontal, QObject:: tr("adress"));
-   model->setHeaderData(7, Qt::Horizontal, QObject:: tr("Num_t"));
 
-return model;
 
-}
 
- bool PERSONNEL::supprimer(int CIN)
-{
-  QSqlQuery query;
-   QString res= QString::number(CIN);
-  query.prepare("Delete from Personnel where CIN = :CIN ");
-  query.bindValue(":CIN", CIN);
-  return    query.exec();
-}
 
-*/
+
+
+
+
+
+
+
+
+
 
 
 
