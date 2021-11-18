@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H
+  #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -30,6 +30,19 @@ private slots:
     void on_spinBox_nbr_p_valueChanged(int arg1);
 
     void on_pushButton_2_clicked();
+
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_6_clicked();
+
+    void on_lineEdit_5_returnPressed();
+
+    void on_pushButton_8_clicked();
+
+
+    void on_pushButton_9_clicked();
+
+    void on_tabWidget_currentChanged(int index);
 
 private:
     Ui::MainWindow *ui;

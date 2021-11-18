@@ -2,6 +2,11 @@
 #include "ui_mainwindow.h"
 #include "sport.h"
 #include <QMessageBox>
+#include <QFile>
+#include <QFileDialog>
+#include <QTextDocument>
+#include <QDebug>
+#include <QtPrintSupport/QPrinter>
 
 Sport sp;
 
@@ -37,6 +42,7 @@ void MainWindow::on_pushButton_clicked()
 
         QMessageBox::information(nullptr, QObject::tr("succes"),
                     QObject::tr("sport ajouté."), QMessageBox::Ok);
+        test=sp.ajouter_mod(id,"ajout",QDateTime::currentDateTime());
         refresh();
 
 
@@ -64,6 +70,7 @@ void MainWindow::on_pushButton_4_clicked()
 
         QMessageBox::information(nullptr, QObject::tr("succes"),
                     QObject::tr("sport modifié."), QMessageBox::Ok);
+        test=sp.ajouter_mod(id,"modification",QDateTime::currentDateTime());
         refresh();
 
 
@@ -107,6 +114,7 @@ void MainWindow::on_pushButton_3_clicked()
         QMessageBox::information(nullptr, QObject::tr("Suppression"),
                                  QObject::tr("Veuillez Choisir un sport du Tableau.\n"
                                              "Click Ok to exit."), QMessageBox::Ok);
+
     else
     {   int id=ui->tableView->model()->data(ui->tableView->model()->index(ui->tableView->currentIndex().row(),0)).toInt();
 
@@ -118,18 +126,19 @@ void MainWindow::on_pushButton_3_clicked()
         switch (ret) {
         case QMessageBox::Ok:
             if (sp.supprimer(id)){
-
+                bool test=sp.ajouter_mod(id,"suppression",QDateTime::currentDateTime());
 
                 QMessageBox::information(0, qApp->tr("Suppression"),
 
                                          qApp->tr("sport suprimée"), QMessageBox::Ok);
+              //  refresh();
 
             }
             else
             {
 
                 QMessageBox::critical(0, qApp->tr("Suppression"),
-                                      qApp->tr("sport non trouvé "), QMessageBox::Ok);
+                                      qApp->tr("sport non supprimé "), QMessageBox::Ok);
             }
 
 
@@ -145,4 +154,101 @@ void MainWindow::on_pushButton_3_clicked()
 
 refresh();
     }
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    QString cls;
+    if (ui->radioButton->isChecked()) cls=" ASC";
+    else if (ui->radioButton_2->isChecked()) cls=" DESC";
+    ui->tableView->setModel(sp.triNom(cls));
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    QString cls;
+    if (ui->radioButton->isChecked()) cls=" ASC";
+    else if (ui->radioButton_2->isChecked()) cls=" DESC";
+    ui->tableView->setModel(sp.triNbr_p(cls));
+
+}
+
+
+
+
+void MainWindow::on_lineEdit_5_returnPressed()
+{
+    ui->tableView->setModel(sp.recherche(ui->lineEdit_5->text()));
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    QString strStream;
+                          QTextStream out(&strStream);
+
+                           const int rowCount = ui->tableView->model()->rowCount();
+                           const int columnCount = ui->tableView->model()->columnCount();
+                          out <<  "<html>\n"
+                          "<head>\n"
+                                           "<meta Content=\"Text/html; charset=Windows-1251\">\n"
+                                           <<  QString("<title>%1</title>\n").arg("strTitle")
+                                           <<  "</head>\n"
+                                           "<body bgcolor=#ffffff link=#5000A0>\n"
+
+                                          //     "<align='right'> " << datefich << "</align>"
+                                           "<center> <H1>Liste des Sports</H1></br></br><table border=1 cellspacing=0 cellpadding=2>\n";
+
+                                       // headers
+                                       out << "<thead><tr bgcolor=#f0f0f0> <th>Numero</th>";
+                                       out<<"<cellspacing=10 cellpadding=3>";
+                                       for (int column = 0; column < columnCount; column++)
+                                           if (!ui->tableView->isColumnHidden(column))
+                                               out << QString("<th>%1</th>").arg(ui->tableView->model()->headerData(column, Qt::Horizontal).toString());
+                                       out << "</tr></thead>\n";
+
+                                       // data table
+                                       for (int row = 0; row < rowCount; row++) {
+                                           out << "<tr> <td bkcolor=0>" << row+1 <<"</td>";
+                                           for (int column = 0; column < columnCount; column++) {
+                                               if (!ui->tableView->isColumnHidden(column)) {
+                                                   QString data = ui->tableView->model()->data(ui->tableView->model()->index(row, column)).toString().simplified();
+                                                   out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
+                                               }
+                                           }
+                                           out << "</tr>\n";
+                                       }
+                                       out <<  "</table> </center>\n"
+                                           "</body>\n"
+                                           "</html>\n";
+
+                                 QString fileName = QFileDialog::getSaveFileName((QWidget* )0, "Sauvegarder en PDF", QString(), "*.pdf");
+                                   if (QFileInfo(fileName).suffix().isEmpty()) { fileName.append(".pdf"); }
+
+                                  QPrinter printer (QPrinter::PrinterResolution);
+                                   printer.setOutputFormat(QPrinter::PdfFormat);
+                                  printer.setPaperSize(QPrinter::A4);
+                                 printer.setOutputFileName(fileName);
+
+                                  QTextDocument doc;
+                                   doc.setHtml(strStream);
+                                   doc.setPageSize(printer.pageRect().size()); // This is necessary if you want to hide the page number
+                                   doc.print(&printer);
+}
+
+
+
+
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    QString cls;
+    if (ui->radioButton->isChecked()) cls=" ASC";
+    else if (ui->radioButton_2->isChecked()) cls=" DESC";
+    ui->tableView->setModel(sp.triType(cls));
+}
+
+void MainWindow::on_tabWidget_currentChanged(int index)
+{
+    sp.statistiques(ui->widget);
+    ui->tableView_2->setModel(sp.afficher_mod());
 }
