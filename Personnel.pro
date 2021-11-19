@@ -1,5 +1,6 @@
 QT       += core gui sql printsupport
-
+QT       += svg
+QT       +=network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -18,15 +19,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     Connexion.cpp \
     Personnel.cpp \
+    dumessengerconnectiondialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    qrcode.cpp
 
 HEADERS += \
     Connexion.h \
     Personnel.h \
-    mainwindow.h
+    dumessengerconnectiondialog.h \
+    mainwindow.h \
+    qrcode.h
 
 FORMS += \
+    dumessengerconnectiondialog.ui \
     mainwindow.ui \
     personnel.ui
 

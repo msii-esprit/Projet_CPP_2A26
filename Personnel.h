@@ -40,7 +40,11 @@ public :
         bool modifierPersonnel(QString,QString,int,QString,QDate,int,QString,QString );
         QSqlQueryModel*  chercherPersonnel(QString);
 
+
+        QSqlQueryModel* trierPersonnelNom();
          QSqlQueryModel* trierPersonnel();
+
+           QSqlQueryModel* trierPersonnelGrade();
          bool supprimerTout();
 
 
