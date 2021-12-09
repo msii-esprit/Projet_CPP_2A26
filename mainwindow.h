@@ -9,6 +9,7 @@
 #include "participant.h"
 #include "logement.h"
 #include "ui_mainwindow.h"
+#include "terrain.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -213,7 +214,21 @@ void on_tableView_3_activated(const QModelIndex &index);
 void on_button_2_clicked();
 void on_pushButton_19_clicked();
 void on_Statistique_clicked();
+/////////// yomna /////////////////
+void on_ajouter_clicked();
 
+
+void on_supprimer_clicked();
+
+QModelIndex on_tableView_7_activated(QModelIndex index);
+
+void on_pushButton_15_clicked();
+
+void on_rechercher_clicked();
+
+void on_trier_clicked();
+
+void on_imprimerpdf_clicked();
 
 
 private:
@@ -228,5 +243,7 @@ private:
     QTcpSocket *mSocket;
     QStringList files;
     int y;
+    // yomna //
+    Terrain t;
 };
 #endif // MAINWINDOW_H

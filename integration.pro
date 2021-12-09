@@ -30,9 +30,12 @@ SOURCES += \
     logement.cpp \
     main.cpp \
     mainwindow.cpp \
+    notification.cpp \
     participant.cpp \
     qrcode.cpp \
     sport.cpp \
+    terrain.cpp \
+    test.cpp \
     utils.cpp
 
 HEADERS += \
@@ -49,9 +52,12 @@ HEADERS += \
     facture.h \
     logement.h \
     mainwindow.h \
+    notification.h \
     participant.h \
     qrcode.h \
     sport.h \
+    terrain.h \
+    test.h \
     utils.h
 
 FORMS += \
