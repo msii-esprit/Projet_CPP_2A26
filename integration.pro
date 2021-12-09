@@ -17,7 +17,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Dataset.cpp \
     Personnel.cpp \
+    Weights.cpp \
     chatserver.cpp \
     chatsocket.cpp \
     connection.cpp \
@@ -28,11 +30,16 @@ SOURCES += \
     logement.cpp \
     main.cpp \
     mainwindow.cpp \
+    participant.cpp \
     qrcode.cpp \
-    sport.cpp
+    sport.cpp \
+    utils.cpp
 
 HEADERS += \
+    Dataset.h \
+    LinearRegressionModel.h \
     Personnel.h \
+    Weights.h \
     chatserver.h \
     chatsocket.h \
     connection.h \
@@ -42,8 +49,10 @@ HEADERS += \
     facture.h \
     logement.h \
     mainwindow.h \
+    participant.h \
     qrcode.h \
-    sport.h
+    sport.h \
+    utils.h
 
 FORMS += \
     dumessengerconnectiondialog.ui \
