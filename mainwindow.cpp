@@ -7,7 +7,7 @@
 #include <QTextDocument>
 #include <QDebug>
 #include <QtPrintSupport/QPrinter>
-
+#include <QPushButton>
 #include "Personnel.h"
 #include <QMessageBox>
 #include <QIntValidator>
@@ -92,6 +92,8 @@
 #include <QListView>
 #include <QAbstractItemModel>
 
+
+
 using qrcodegen::QrCode;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -141,15 +143,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui->nom_logement->setInputMask("AAAAAAAAAAAA");
     ui->nbr_ch->setInputMask("9999");
     this->setStyleSheet(" background-image: url(C:/AMOUNI/test.png);");
-        ui->tableView_3->setModel(p.afficher());
+        ui->tableView_4->setModel(p.afficher());
       ui->tableView_5->setModel(p.afficherL());
         ui->tableView_6->setModel(p.afficherPL());
 
 
         QObject::connect(ui->button,SIGNAL(clicked()),this,SLOT(on_pushButtonajouterclicked()));
-        QObject::connect(ui->pushButton_2,SIGNAL(clicked()),this,SLOT(on_pushButton_modifier_clicked()));
+        QObject::connect(ui->pushButton_16,SIGNAL(clicked()),this,SLOT(on_pushButton_modifier_clicked()));
         QObject::connect(ui->pushButton_predict,SIGNAL(clicked()),this,SLOT(on_pushButton_predict_clicked()));
-        QObject::connect(ui->pushButton_4,SIGNAL(clicked()),this,SLOT(on_pushButton_tirage5_clicked()));
+        QObject::connect(ui->pushButton_18,SIGNAL(clicked()),this,SLOT(on_pushButton_tirage5_clicked()));
 
          QMetaObject::connectSlotsByName(ui->tableWidget_5);
 
@@ -170,13 +172,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->lineEdit_nom->placeholderText();
     ui->lineEdit_nom->setInputMask("A<AAAAAAAAAAAAA");
     ui->lineEdit_prenom->setInputMask("A<AAAAAAA AAAAAAA");
-    ui->widget->hide();
+    ui->widget_2->hide();
     QValidator  *v= new QIntValidator(0,100,this);
     ui->lineEdit_6->setValidator(v);
     ui->lineEdit_M->setValidator(v);
-    ui->widget_2->hide();
+    ui->widget_3->hide();
 
-     ui->tableView_2->setModel(p.afficher());
+     ui->tableView_3->setModel(p.afficher());
 
 }
 
@@ -1300,7 +1302,7 @@ participant p(id,nom,prenom,equipe,etat,type,nationalite,date_nais,medaille);
 
 if(test)
 { ui->tableView->setModel(p.afficher());
-    int x=ui->tableView->model()->rowCount();
+    int x=ui->tableView_3->model()->rowCount();
     ui->lcdNumber->display(x);
     qDebug()<< x;
     QMessageBox::information(nullptr, QObject::tr("ok"),
@@ -1323,7 +1325,7 @@ else
 QModelIndex  MainWindow::on_tableView_activated( QModelIndex index)
 {
 
-     index = ui->tableView->currentIndex();
+     index = ui->tableView_3->currentIndex();
     return(index);
 
 }
@@ -1333,7 +1335,7 @@ void MainWindow::on_pushButton66_clicked()
 {   QModelIndex index;
 
     index=on_tableView_activated(index);
-   QVariant value=ui->tableView->model()->data(index);
+   QVariant value=ui->tableView_3->model()->data(index);
 QString v=QVariant(value).toString();
 int v1=v.count();
 
@@ -1344,8 +1346,8 @@ if((value.userType()!=QMetaType::QString)&&(v1>3))
 
 
     if(test)
-    { ui->tableView->setModel(p.afficher());
-        int t=ui->tableView->model()->rowCount();
+    { ui->tableView_3->setModel(p.afficher());
+        int t=ui->tableView_3->model()->rowCount();
         ui->lcdNumber->display(t);
         QMessageBox::information(nullptr, QObject::tr("ok"),
                               QObject::tr("suppression successful.\n"
@@ -1374,8 +1376,8 @@ else
 bool MainWindow::search1(int t)
 {bool test=false;
 
-       for (int var = 0; var < ui->tableView->model()->rowCount(); ++var) {
-           if(ui->tableView->model()->index(var,0).data().toInt()==t){
+       for (int var = 0; var < ui->tableView_3->model()->rowCount(); ++var) {
+           if(ui->tableView_3->model()->index(var,0).data().toInt()==t){
               ;
               test=true;
            }
@@ -1409,7 +1411,7 @@ QVariant c=index.sibling(row,6).data();
 QString  c1=c.toString();
 QVariant d=index.sibling(row,7).data();
 QDate d1=d.toDate();
-     ui->widget->show();
+     ui->widget_2->show();
     ui->lineEdit_ID->setText(s1);
     ui->lineEdit_nom->setText(v1);
     ui->lineEdit_prenom->setText(f1);
@@ -1498,9 +1500,9 @@ else
 
 
     if(test)
-    { ui->tableView->setModel(p.afficher());
-        int x=ui->tableView->model()->rowCount();
-        ui->widget->hide();
+    { ui->tableView_3->setModel(p.afficher());
+        int x=ui->tableView_3->model()->rowCount();
+        ui->widget_2->hide();
         ui->lcdNumber->display(x);
         qDebug()<< x;
         QMessageBox::information(nullptr, QObject::tr("ok"),
@@ -1523,7 +1525,7 @@ else
 
 void MainWindow::on_buttonBox_rejected()
 {
-  ui->widget->hide();
+  ui->widget_2->hide();
 }
 
 
@@ -1531,8 +1533,8 @@ void MainWindow::on_buttonBox_rejected()
 
 void MainWindow::on_lineEdit_R_returnPressed()
 {
-     for (int var = 0; var < ui->tableView->model()->rowCount(); ++var) {
-         ui->tableView->showRow(var);
+     for (int var = 0; var < ui->tableView_3->model()->rowCount(); ++var) {
+         ui->tableView_3->showRow(var);
      }
 }
 
@@ -1980,7 +1982,7 @@ view2->setRowHidden(index,true);
 
 
 void MainWindow::on_pushButton_tirage5_clicked()
-{ui->widget_2->show();
+{ui->widget_3->show();
 QVector <QString> tabC1;
 
 QVector <QString> tabC2;
@@ -2113,7 +2115,7 @@ m=tabC1.takeAt(c1);
 
 void MainWindow::on_toolButton_clicked()
 {
-    ui->widget_2->hide();
+    ui->widget_3->hide();
 }
 
 void MainWindow::on_lineEdit_R_cursorPositionChanged(int arg1, int arg2)
@@ -2121,80 +2123,78 @@ void MainWindow::on_lineEdit_R_cursorPositionChanged(int arg1, int arg2)
     QVariant t=ui->lineEdit_R->text();
       if(t.canConvert<int>()==true)
       {
- for (int var = 0; var < ui->tableView->model()->rowCount(); ++var) {
-     if(((ui->tableView->model()->index(var,0).data().toString().contains(i))==true)||((ui->tableView->model()->index(var,1).data().toString().contains(i))==true)||(ui->tableView->model()->index(var,3).data().toString().contains(i))==true){
+ for (int var = 0; var < ui->tableView_3->model()->rowCount(); ++var) {
+     if(((ui->tableView_3->model()->index(var,0).data().toString().contains(i))==true)||((ui->tableView_3->model()->index(var,1).data().toString().contains(i))==true)||(ui->tableView->model()->index(var,3).data().toString().contains(i))==true){
 
-        ui->tableView->showRow(var);
+        ui->tableView_3->showRow(var);
 
      }
      else
-         ui->tableView->hideRow(var);
+         ui->tableView_3->hideRow(var);
  }
 }
 
 
 }
 
-/*void MainWindow::on_Statistique_clicked()
+void MainWindow::on_Statistique_clicked()
 {
+    int i=0,j=0,k=0;
+    QString r=ui->comboBox_5->currentText();
+                       for (int var = 0; var < ui->tableView_3->model()->rowCount(); ++var) {
+                               if(ui->tableView_3->model()->index(var,3).data().toString()==r){
+                                   if(ui->tableView_3->model()->index(var,5).data().toString()=="foot")
+                                     i+= ui->tableView_3->model()->index(var,8).data().toInt();
+                                   else if(ui->tableView_3->model()->index(var,5).data().toString()=="Handball")
+                                        j+=ui->tableView_3->model()->index(var,8).data().toInt();
+                                   else if(ui->tableView_3->model()->index(var,5).data().toString()=="Tennis")
+                                       k+=ui->tableView_3->model()->index(var,8).data().toInt();
+}
 
 
 
 
-
-                         a=6;
-
-                          q=7;
-
-                          q1=8;
+                           }
 
 
-                        q2=9;
-
-
-
-
-
-
-
-                         MainWindow::makePlot();
-
-
-                /*          QLineSeries *series = new QLineSeries();
-                          *series << QPointF(0, 6) << QPointF(9, 4) << QPointF(15, 20) << QPointF(25, 12) << QPointF(29, 26);
-                          QChart *chart = new QChart();
-                          chart->legend()->hide();
-                          chart->addSeries(series);
-                 if (age!=0)
-                 {QPieSlice *slice = series->slices().at(0);
-                  slice->setLabelVisible();
-                  slice->setPen(QPen());}
-                 if ( agee!=0)
-                 {
-                          // Add label, explode and define brush for 2nd slice
-                          QPieSlice *slice1 = series->slices().at(1);
-                          //slice1->setExploded();
-                          slice1->setLabelVisible();
-                 }
-                 if(ageee!=0)
-                 {
-                          // Add labels to rest of slices
-                          QPieSlice *slice2 = series->slices().at(2);
-                          //slice1->setExploded();
-                          slice2->setLabelVisible();
-                 }
-                         // Create the chart widget
-                         QChart *chart = new QChart();
-                         // Add data to chart with title and hide legend
-                         chart->addSeries(series);
-                         chart->setTitle("Pourcentage Par Age :Nombre Des Aimaux "+ QString::number(total));
-                         chart->legend()->hide();
-                         // Used to display the chart
-                         QChartView *chartView = new QChartView(chart);
-                         chartView->setRenderHint(QPainter::Antialiasing);
-                         chartView->resize(1000,500);
-                         chartView->show();
-*/
+                                        float total1=i+j+k;
+                                        QString a1=QString("foot "+QString::number((i*100)/total1,'f',2)+"%" );
+                                        QString b1=QString("Tennis"+QString::number((k*100)/total1,'f',2)+"%" );
+                                        QString c1=QString("Handball"+QString::number((j*100)/total1,'f',2)+"%" );
+                                        QPieSeries *series1 = new QPieSeries();
+                                        series1->append(a1,i);
+                                        series1->append(b1,k);
+                                        series1->append(c1,j);
+                                if (i!=0)
+                                {QPieSlice *slice3 = series1->slices().at(0);
+                                 slice3->setLabelVisible();
+                                 slice3->setPen(QPen());}
+                                if ( k!=0)
+                                {
+                                         // Add label, explode and define brush for 2nd slice
+                                         QPieSlice *slice4 = series1->slices().at(1);
+                                         //slice4->setExploded();
+                                         slice4->setLabelVisible();
+                                }
+                                if(j!=0)
+                                {
+                                         // Add labels to rest of slices
+                                         QPieSlice *slice5 = series1->slices().at(2);
+                                         //slice1->setExploded();
+                                         slice5->setLabelVisible();
+                                }
+                                        // Create the chart widget
+                                        QChart *chart1 = new QChart();
+                                        // Add data to chart with title and hide legend
+                                        chart1->addSeries(series1);
+                                        chart1->setTitle("nombres des medailles pour l'equipe");
+                                        chart1->legend()->hide();
+                                        // Used to display the chart
+                                        QChartView *chartView1 = new QChartView(chart1);
+                                        chartView1->setRenderHint(QPainter::Antialiasing);
+                                        chartView1->resize(1000,500);
+                                        chartView1->show();
+}
 
 
 

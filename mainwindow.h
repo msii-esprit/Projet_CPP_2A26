@@ -7,6 +7,8 @@
 #include "dumessengerconnectiondialog.h"
 #include <QTcpSocket>
 #include "participant.h"
+#include "logement.h"
+#include "ui_mainwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -210,6 +212,9 @@ void on_tableView_3_activated(const QModelIndex &index);
 
 void on_button_2_clicked();
 void on_pushButton_19_clicked();
+void on_Statistique_clicked();
+
+
 
 private:
     Ui::MainWindow *ui;

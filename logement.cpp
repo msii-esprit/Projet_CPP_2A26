@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QTableView>
 #include <QMessageBox>
-#include <ui_mainwindow.h>
+
 using namespace std;
 Logement::Logement()
 {
