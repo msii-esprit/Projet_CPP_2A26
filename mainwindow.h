@@ -10,7 +10,8 @@
 #include "logement.h"
 #include "ui_mainwindow.h"
 #include "terrain.h"
-
+#include "arduino.h"
+#include "spectateurs.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -207,9 +208,9 @@ void on_lineEdit_R_cursorPositionChanged(int arg1, int arg2);
 
 
 
-void on_tableView_2_clicked(const QModelIndex &index);
+void on_tableView_4_clicked(const QModelIndex &index);
 
-void on_tableView_3_activated(const QModelIndex &index);
+void on_tableView_5_activated(const QModelIndex &index);
 
 void on_button_2_clicked();
 void on_pushButton_19_clicked();
@@ -229,7 +230,22 @@ void on_rechercher_clicked();
 void on_trier_clicked();
 
 void on_imprimerpdf_clicked();
+void update_label();
+//omar.//
+void on_ajouterOM_clicked();
 
+void on_affichage_clicked();
+
+void on_sup_clicked();
+
+void on_modif_clicked();
+
+void on_tab_clicked(const QModelIndex &index);
+
+
+void on_pushButton_20_clicked();
+
+void on_pushButton_21_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -244,6 +260,9 @@ private:
     QStringList files;
     int y;
     // yomna //
-    Terrain t;
+    Terrain k;
+    Arduino J;
+    //  omar
+    Spectateurs S;
 };
 #endif // MAINWINDOW_H

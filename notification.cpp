@@ -26,8 +26,23 @@ void Notification::notification_supprimerterrain(){
     notifyIcon->show();
     notifyIcon->showMessage("Gestion des TERRAINS ","Un TERRAIN est supprimé",QSystemTrayIcon::Information,15000);
 }
+void Notification::notification_ard(){
+    QSystemTrayIcon *notifyIcon = new QSystemTrayIcon;
+
+   // notifyIcon->setIcon(QIcon(":/new/prefix1/MyResources/computer-icons-avatar-user-login-avatar.jpg"));
+    notifyIcon->show();
+    notifyIcon->showMessage("LOGIN ","carte autorisé",QSystemTrayIcon::Information,15000);
+}
 
 
+void Notification::notification_ard2()
+{
+    QSystemTrayIcon *notifyIcon = new QSystemTrayIcon;
+
+   // notifyIcon->setIcon(QIcon(":/new/prefix1/MyResources/computer-icons-avatar-user-login-avatar.jpg"));
+    notifyIcon->show();
+    notifyIcon->showMessage("LOGIN ","carte non autorisé",QSystemTrayIcon::Information,15000);
+}
 
 
 

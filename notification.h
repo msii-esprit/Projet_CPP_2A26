@@ -14,7 +14,9 @@ public:
 
     void notification_modifierterrain();
 
+void notification_ard();
 
+void notification_ard2();
 
 };
 

@@ -56,6 +56,7 @@
 #include <qrcode.h>
 #include <string>
 #include <iostream>
+#include "arduino.h"
 #include <fstream>
 #include <QtSvg/QSvgRenderer>
 #include "qrcode.h"
@@ -182,9 +183,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui->widget_3->hide();
 
      ui->tableView_3->setModel(p.afficher());
-     ui->tableView_7->setModel(t.afficher());
+     ui->tableView_7->setModel(k.afficher());
      ui->capacite_TU->setInputMask("99999");
 
+     int ret=J.connect_arduino();
+                       switch(ret){
+                       case(0):qDebug()<< "arduino is availble and connected to :"<< J.getarduino_port_name();
+                           break;
+                       case(1):qDebug()<< "arduino is availble but not connected to :"<< J.getarduino_port_name();
+                           break;
+                       case(-1):qDebug()<< "arduino is not availble";
+                       }
+                       QObject::connect(J.getserial(),SIGNAL(readyRead()),this,SLOT(update_label()));
 }
 
 MainWindow::~MainWindow()
@@ -192,6 +202,52 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::update_label(){
+     Notification N;
+     J.dataa=J.read_from_arduino();
+
+         if(J.dataa=="1")
+     {
+             QStackedWidget stackedWidget;
+                                 connect(ui->stackedWidget, SIGNAL(clicked()), this, SLOT(viewData));
+
+                                         ui->stackedWidget->setCurrentIndex(3);
+
+             ui->label_69->setText("Acces Autorisé"); // si les données reçues de arduino via la liaison série sont égales à 1
+         // alors afficher ON
+
+     N.notification_ard();
+     }
+         else if (J.dataa=="0")
+     {
+             ui->label_69->setText("Acces non autorisé");
+            N.notification_ard2();
+         // si les données reçues de arduino via la liaison série sont égales à 0
+          //alors afficher ON
+         J.write_to_arduino("2");
+
+
+     /*QString code="";
+    data=C.read_from_arduino();
+    QString DataAsString = QString(data);
+    code=code+DataAsString;
+    qDebug()<< code;
+    qDebug()<<code.length();
+
+ //   if(code.length()==8){
+
+       if(code.compare("6091F128")==0){
+           C.write_to_arduino("1");
+           ui->label_14->setText("Authorised access");
+              N.notification_ard();
+       }
+       else{
+           C.write_to_arduino("2");
+           ui->label_14->setText("Access denied");
+       }
+//}
+    qDebug()<<code.compare("6091F128");*/
+}}
 
 void MainWindow::on_pushButton_17_clicked()
 {
@@ -217,7 +273,7 @@ void MainWindow::on_pushButton_17_clicked()
                                             //hide(); mainwindow = new MainWindow(this); mainwindow->show(); }
                                             else if(username == "yomna" && password == "yomna")
                                             { QMessageBox::information(this, "Login", "Username and password is correct, welcome yomna");
-                                   ui->stackedWidget->setCurrentIndex(4);
+                                   ui->stackedWidget->setCurrentIndex(5);
                                 }
                                 else if(username == "hazem" && password == "hazem")
                             { QMessageBox::information(this, "Login", "Username and password is correct, welcome hazem");
@@ -1306,7 +1362,7 @@ participant p(id,nom,prenom,equipe,etat,type,nationalite,date_nais,medaille);
 
 
 if(test)
-{ ui->tableView->setModel(p.afficher());
+{ ui->tableView_3->setModel(p.afficher());
     int x=ui->tableView_3->model()->rowCount();
     ui->lcdNumber->display(x);
     qDebug()<< x;
@@ -1316,6 +1372,7 @@ if(test)
 
       }
 else
+
 {
     QMessageBox::critical(nullptr, QObject::tr("add failed"),
                 QObject::tr("add failed.\n"
@@ -2205,7 +2262,7 @@ void MainWindow::on_Statistique_clicked()
 
 
 
-void MainWindow::on_tableView_2_clicked(const QModelIndex &index)
+void MainWindow::on_tableView_4_clicked(const QModelIndex &index)
 { QVariant s=index.data();
     int s1=s.toInt();
     if(index.column()==0)
@@ -2217,7 +2274,7 @@ void MainWindow::on_tableView_2_clicked(const QModelIndex &index)
 
 }
 
-void MainWindow::on_tableView_3_activated(const QModelIndex &index)
+void MainWindow::on_tableView_5_activated(const QModelIndex &index)
 {QVariant s=index.data();
     QString s1=s.toString();
     if(index.column()==0)
@@ -2245,7 +2302,7 @@ void MainWindow::on_pushButton_19_clicked()
 
                                 ui->stackedWidget->setCurrentIndex(0);
 }
-///////////////////// yomna ///////////////////////////////////
+/////////////////////// yomna ///////////////////////////////////
 
 void MainWindow::on_ajouter_clicked()
 {
@@ -2265,7 +2322,7 @@ void MainWindow::on_ajouter_clicked()
 
         msgbox.setText("ajout avec succes.");
          N.notification_ajoutterrain();
-    ui->tableView->setModel(t.afficher());
+    ui->tableView_7->setModel(k.afficher());
     }
     else
         msgbox.setText("echec d'ajout");
@@ -2279,17 +2336,17 @@ void MainWindow::on_ajouter_clicked()
 void MainWindow::on_supprimer_clicked()
 {   QModelIndex index;
     Notification N;
-    index=on_tableView_activated(index);
-    QVariant value=ui->tableView->model()->data(index);
+    index=on_tableView_7_activated(index);
+    QVariant value=ui->tableView_7->model()->data(index);
     QString S=value.toString();
 
-    Terrain t1;
-    bool test=t1.supprimer(S);
+    //Terrain t1;
+    bool test=k.supprimer(S);
     QMessageBox msgbox;
 
     if(test)
     {N.notification_supprimerterrain();
-        ui->tableView->setModel(t.afficher());
+        ui->tableView_7->setModel(k.afficher());
         msgbox.setText("suppression avec succes.");
     }
     else
@@ -2309,8 +2366,8 @@ void MainWindow::on_pushButton_15_clicked()//modifier
 {
     Notification N;
     QModelIndex index;
-    index=on_tableView_activated(index);
-    QVariant value=ui->tableView->model()->data(index);
+    index=on_tableView_7_activated(index);
+    QVariant value=ui->tableView_7->model()->data(index);
     QString S=value.toString();
     QString etat_T=ui->etat_TU->currentText();
     int capacite=ui->capacite_TU->text().toInt();
@@ -2324,7 +2381,7 @@ void MainWindow::on_pushButton_15_clicked()//modifier
    if(test)
    {N.notification_modifierterrain();
        msgbox.setText("modification avec succes.");
-   ui->tableView->setModel(t.afficher());
+   ui->tableView_7->setModel(k.afficher());
    }
 else
       msgbox.setText("echec de modification.");
@@ -2334,20 +2391,20 @@ else
 void MainWindow::on_rechercher_clicked()
 {
     Terrain t;
-      ui->tableView->setModel(t.rechercher(ui->rechercher_TU->text()));
+      ui->tableView_7->setModel(t.rechercher(ui->rechercher_TU->text()));
 }
 
 
 
 void MainWindow::on_trier_clicked()
 {
-    Terrain t;
-       if(ui->radioButton->isChecked())
-       {ui->tableView->setModel(t.trier_n());}
-       else if(ui->radioButton_2->isChecked())
-       {ui->tableView->setModel(t.trier_t());}
-       else if(ui->radioButton_3->isChecked())
-       {ui->tableView->setModel(t.trier_c());}
+
+       if(ui->radioButton_3->isChecked())
+       {ui->tableView_7->setModel(k.trier_n());}
+       else if(ui->radioButton_4->isChecked())
+       {ui->tableView_7->setModel(k.trier_t());}
+       else if(ui->radioButton_5->isChecked())
+       {ui->tableView_7->setModel(k.trier_c());}
 
 }
 
@@ -2358,8 +2415,8 @@ void MainWindow::on_imprimerpdf_clicked()
     QString strStream;
                          QTextStream out(&strStream);
 
-                         const int rowCount = ui->tableView->model()->rowCount();
-                         const int columnCount = ui->tableView->model()->columnCount();
+                         const int rowCount = ui->tableView_7->model()->rowCount();
+                         const int columnCount = ui->tableView_7->model()->columnCount();
                          QString TT = QDate::currentDate().toString("yyyy/MM/dd");
                          out <<"<html>\n"
                                "<head>\n"
@@ -2373,16 +2430,16 @@ void MainWindow::on_imprimerpdf_clicked()
                          // headers
                          out << "<thead><tr bgcolor=#d6e5ff>";
                          for (int column = 0; column < columnCount; column++)
-                             if (!ui->tableView->isColumnHidden(column))
-                                 out << QString("<th>%1</th>").arg(ui->tableView->model()->headerData(column, Qt::Horizontal).toString());
+                             if (!ui->tableView_7->isColumnHidden(column))
+                                 out << QString("<th>%1</th>").arg(ui->tableView_7->model()->headerData(column, Qt::Horizontal).toString());
                          out << "</tr></thead>\n";
 
                          // data table
                          for (int row = 0; row < rowCount; row++) {
                              out << "<tr>";
                              for (int column = 0; column < columnCount; column++) {
-                                 if (!ui->tableView->isColumnHidden(column)) {
-                                     QString data =ui->tableView->model()->data(ui->tableView->model()->index(row, column)).toString().simplified();
+                                 if (!ui->tableView_7->isColumnHidden(column)) {
+                                     QString data =ui->tableView_7->model()->data(ui->tableView_7->model()->index(row, column)).toString().simplified();
                                      out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
                                  }
                              }
@@ -2405,4 +2462,112 @@ void MainWindow::on_imprimerpdf_clicked()
                          delete document;
 
 
+}
+
+
+
+void MainWindow::on_pushButton_20_clicked()
+{
+    QStackedWidget stackedWidget;
+                        connect(ui->stackedWidget, SIGNAL(clicked()), this, SLOT(viewData));
+
+                                ui->stackedWidget->setCurrentIndex(0);
+}
+/////////////////////////////////// omar /////////////////////////////////////////////////////////////////////////////
+void MainWindow::on_modif_clicked()
+{
+    int cin=ui->cin_2->text().toInt();
+    QString nom=ui->nom_2->text();
+    int age=ui->age->text().toInt();
+    int num=ui->num->text().toInt();
+    Spectateurs s(cin,nom,age,num);
+
+    bool test=s.modifier();
+    if(test)
+    {
+
+ui->tab_15->setModel(s.afficher());
+
+    }
+    else
+    {QMessageBox::critical(nullptr, QObject::tr("Erreur"),
+                    QObject::tr("Ajouter non effectué.\n"
+                                "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+
+}
+
+void MainWindow::on_ajouterOM_clicked()
+{    int cin=ui->cin_2->text().toInt();
+     QString nom=ui->nom_2->text();
+     int age=ui->age->text().toInt();
+     int num=ui->num->text().toInt();
+     Spectateurs s(cin,nom,age,num);
+
+     bool test=s.ajouter();
+     if(test)
+     {
+
+ ui->tab_15->setModel(S.afficher());
+
+     }
+     else
+     {QMessageBox::critical(nullptr, QObject::tr("Erreur"),
+                     QObject::tr("Ajouter non effectué.\n"
+                                 "Click Cancel to exit."), QMessageBox::Cancel);
+     }
+
+}
+
+void MainWindow::on_affichage_clicked()
+{
+ ui->tab_15->setModel(S.afficher());
+}
+
+void MainWindow::on_sup_clicked()
+{
+    Spectateurs s;
+    s.setcin(ui->sup_2->text().toInt());
+    bool test=s.supprimer(s.getcin());
+    if(test)
+    {
+
+        ui->tab_15->setModel(s.afficher());
+
+    }
+    else{
+        QMessageBox::critical(nullptr, QObject::tr("Erreur"),
+                    QObject::tr("Supprimer non effectué.\n"
+                                "Click Cancel to exit."), QMessageBox::Cancel);}
+}
+
+
+
+void MainWindow::on_tab_clicked(const QModelIndex &index)
+{
+
+    QString cin=ui->tab_15->model()->data(ui->tab_15->model()->index(ui->tab_15->currentIndex().row(),0)).toString();
+    ui->cin->setText(cin);
+
+    QString nom=ui->tab_15->model()->data(ui->tab_15->model()->index(ui->tab_15->currentIndex().row(),1)).toString();
+    ui->nom->setText(nom);
+
+    QString age=ui->tab_15->model()->data(ui->tab_15->model()->index(ui->tab_15->currentIndex().row(),2)).toString();
+    ui->age->setText(age);
+    QString num=ui->tab_15->model()->data(ui->tab_15->model()->index(ui->tab_15->currentIndex().row(),3)).toString();
+    ui->num->setText(num);
+
+    if (index.column() == 0){
+    ui->sup_2->setText(ui->tab_15->model()->data(index).toString());
+
+}
+}
+
+
+void MainWindow::on_pushButton_21_clicked()
+{
+    QStackedWidget stackedWidget;
+                        connect(ui->stackedWidget, SIGNAL(clicked()), this, SLOT(viewData));
+
+                                ui->stackedWidget->setCurrentIndex(0);
 }

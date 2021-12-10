@@ -1,6 +1,6 @@
 QT       += core gui sql multimedia multimediawidgets printsupport charts serialport svg network
 QT+=axcontainer
-
+QT       += core gui  serialport
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -19,7 +19,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     Dataset.cpp \
     Personnel.cpp \
+    Stat.cpp \
     Weights.cpp \
+    arduino.cpp \
     chatserver.cpp \
     chatsocket.cpp \
     connection.cpp \
@@ -32,7 +34,9 @@ SOURCES += \
     mainwindow.cpp \
     notification.cpp \
     participant.cpp \
+    qcustomplot.cpp \
     qrcode.cpp \
+    spectateurs.cpp \
     sport.cpp \
     terrain.cpp \
     test.cpp \
@@ -42,7 +46,9 @@ HEADERS += \
     Dataset.h \
     LinearRegressionModel.h \
     Personnel.h \
+    Stat.h \
     Weights.h \
+    arduino.h \
     chatserver.h \
     chatsocket.h \
     connection.h \
@@ -54,13 +60,16 @@ HEADERS += \
     mainwindow.h \
     notification.h \
     participant.h \
+    qcustomplot.h \
     qrcode.h \
+    spectateurs.h \
     sport.h \
     terrain.h \
     test.h \
     utils.h
 
 FORMS += \
+    Stat.ui \
     dumessengerconnectiondialog.ui \
     form.ui \
     personnel.ui\
